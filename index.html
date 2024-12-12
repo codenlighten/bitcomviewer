@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- meta -->
     <meta
       name="description"
       content="Decentravision - Blockchain Media Viewer"
@@ -11,14 +10,6 @@
     <meta name="keywords" content="Decentravision, Blockchain, Media, Viewer" />
     <meta name="author" content="Decentravision" />
     <meta name="robots" content="index, follow" />
-    <meta name="revisit-after" content="1 days" />
-    <meta name="googlebot" content="index, follow" />
-    <meta name="language" content="English" />
-    <meta name="distribution" content="global" />
-    <meta name="rating" content="general" />
-    <meta name="referrer" content="no-referrer" />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://decentravision.com/" />
     <meta
@@ -30,8 +21,6 @@
       content="Decentravision - Blockchain Media Viewer"
     />
     <meta property="og:image" content="https://decentravision.com/logo.webp" />
-
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://decentravision.com/" />
     <meta
@@ -46,11 +35,8 @@
       property="twitter:image"
       content="https://decentravision.com/logo.webp"
     />
-
-    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="./logo.webp" />
     <link rel="icon" type="image/png" sizes="32x32" href="./logo.webp" />
-
     <title>Decentravision - Blockchain Media Viewer</title>
     <script src="https://unpkg.com/bsv@1.5.6/bsv.min.js"></script>
     <style>
@@ -65,8 +51,10 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 20px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
       }
-
       #app {
         max-width: 1000px;
         margin: 0 auto;
@@ -75,7 +63,6 @@
         border-radius: 10px;
         box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
       }
-
       .container {
         background-color: rgba(0, 0, 0, 0.2);
         margin: 20px 0;
@@ -83,14 +70,13 @@
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
       }
-
       h1,
-      h2 {
+      h2,
+      h3 {
         text-align: center;
         color: #fff;
         margin-bottom: 20px;
       }
-
       input[type="text"] {
         width: 100%;
         padding: 10px;
@@ -100,7 +86,6 @@
         background-color: rgba(255, 255, 255, 0.9);
         box-sizing: border-box;
       }
-
       button {
         background-color: #4caf50;
         color: white;
@@ -112,11 +97,9 @@
         margin: 10px 0;
         transition: background-color 0.3s;
       }
-
       button:hover {
         background-color: #45a049;
       }
-
       #contentDisplay {
         background-color: rgba(255, 255, 255, 0.9);
         padding: 20px;
@@ -125,14 +108,12 @@
         color: #000;
         overflow-x: auto;
       }
-
       .metadata {
         background-color: rgba(0, 0, 0, 0.1);
         padding: 10px;
         border-radius: 4px;
         margin: 10px 0;
       }
-
       .error {
         color: #ff4444;
         background-color: rgba(255, 68, 68, 0.1);
@@ -140,7 +121,6 @@
         border-radius: 4px;
         margin: 10px 0;
       }
-
       #iframe {
         width: 100%;
         min-height: 500px;
@@ -148,7 +128,6 @@
         border-radius: 4px;
         background-color: white;
       }
-
       .tag {
         display: inline-block;
         background-color: #4caf50;
@@ -158,11 +137,9 @@
         margin: 2px;
         font-size: 12px;
       }
-
       #history {
         margin-top: 20px;
       }
-
       .history-item {
         background-color: rgba(255, 255, 255, 0.1);
         padding: 10px;
@@ -171,27 +148,53 @@
         cursor: pointer;
         transition: background-color 0.3s;
       }
-
       .history-item:hover {
         background-color: rgba(255, 255, 255, 0.2);
       }
-
-      footer {
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .search-container {
+        display: flex;
+        gap: 10px;
+      }
+      .content-container {
+        flex-grow: 1;
+      }
+      #loading {
         text-align: center;
         margin-top: 20px;
+      }
+      footer {
+        margin-top: auto;
+        text-align: center;
+        padding: 20px;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h2>Decentravision - Blockchain Media Viewer</h2>
-      <input type="text" id="txid" placeholder="Enter transaction ID" />
-      <button onclick="viewContent()">View Content</button>
+    <div id="app">
+      <header>
+        <img src="./logo.webp" alt="Decentravision Logo" style="height: 50px" />
+        <h1>Decentravision - Blockchain Media Viewer</h1>
+      </header>
+      <div class="container search-container">
+        <input type="text" id="txid" placeholder="Enter transaction ID" />
+        <button onclick="viewContent()">View Content</button>
+      </div>
+      <div id="loading" style="display: none">Loading...</div>
+      <div class="container content-container">
+        <h3>Content:</h3>
+        <div id="content"></div>
+      </div>
+      <div id="history" class="container">
+        <h3>Recent Transactions</h3>
+        <div id="history-list"></div>
+      </div>
     </div>
-    <div class="container">
-      <div id="content"></div>
-    </div>
-    <!-- copyright 2024 -->
     <footer>
       <div class="container">
         <p>
@@ -200,12 +203,13 @@
       </div>
     </footer>
     <script>
-      // Function to view content
       const Buffer = bsv.deps.Buffer;
+
       async function viewContent() {
         const txid = document.getElementById("txid").value.trim();
         if (!txid) return alert("Please enter a transaction ID");
 
+        showLoading(true);
         try {
           // Get transaction
           const response = await fetch(
@@ -230,8 +234,7 @@
             // Display in iframe
             contentElement.innerHTML = `<iframe src="data:text/html;charset=utf-8,${encodeURIComponent(
               html
-            )}" 
-                        style="width: 100%; height: 600px; border: 1px solid #ccc;"></iframe>`;
+            )}" style="width: 100%; height: 600px; border: 1px solid #ccc;"></iframe>`;
           } else if (content.includes("image/")) {
             // Handle images
             contentElement.innerHTML = `<img src="data:image/png;base64,${content}" style="max-width: 100%;">`;
@@ -239,10 +242,42 @@
             // Default to text display
             contentElement.innerHTML = `<pre>${content}</pre>`;
           }
+
+          // Add to history
+          addToHistory(txid);
         } catch (error) {
-          document.getElementById(
-            "content"
-          ).innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+          showError(`Error: ${error.message}`);
+        } finally {
+          showLoading(false);
+        }
+      }
+
+      function showLoading(isLoading) {
+        document.getElementById("loading").style.display = isLoading
+          ? "block"
+          : "none";
+      }
+
+      function showError(message) {
+        document.getElementById(
+          "content"
+        ).innerHTML = `<p class="error">${message}</p>`;
+      }
+
+      function addToHistory(txid) {
+        const historyList = document.getElementById("history-list");
+        const historyItem = document.createElement("div");
+        historyItem.className = "history-item";
+        historyItem.textContent = txid;
+        historyItem.onclick = () => {
+          document.getElementById("txid").value = txid;
+          viewContent();
+        };
+        historyList.prepend(historyItem);
+
+        // Limit history to 5 items
+        while (historyList.children.length > 5) {
+          historyList.removeChild(historyList.lastChild);
         }
       }
 
@@ -253,6 +288,16 @@
         document.getElementById("txid").value = txidParam;
         viewContent();
       }
+
+      // Add event listener for Enter key
+      document
+        .getElementById("txid")
+        .addEventListener("keypress", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            viewContent();
+          }
+        });
     </script>
   </body>
 </html>
