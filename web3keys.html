@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="SmartLedger Web3 Key Generator for SmartLedger Solutions"
+    />
+    <meta
+      name="keywords"
+      content="SmartLedger, BSV, Web3, Key Generator, SmartLedger Solutions"
+    />
+    <meta name="author" content="SmartLedger Solutions" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://plugins.whatsonchain.com/api/plugin/main/f860fe5105526cad985ce7ce2da2c9448eafa9eef46d770a0a06e6feae591ec3/0"
+    />
+    <!-- twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@smart_ledger" />
+    <meta name="twitter:title" content="BSV Web3 Key Generator" />
+    <meta
+      name="twitter:description"
+      content="SmartLedger Web3 Key Generator for SmartLedger Solutions"
+    />
+    <meta
+      name="twitter:image"
+      content="https://plugins.whatsonchain.com/api/plugin/main/f860fe5105526cad985ce7ce2da2c9448eafa9eef46d770a0a06e6feae591ec3/0"
+    />
+
+    <!-- open graph -->
+    <meta property="og:title" content="BSV Web3 Key Generator" />
+    <meta
+      property="og:description"
+      content="SmartLedger Web3 Key Generator for SmartLedger Solutions"
+    />
+    <meta
+      property="og:image"
+      content="https://plugins.whatsonchain.com/api/plugin/main/f860fe5105526cad985ce7ce2da2c9448eafa9eef46d770a0a06e6feae591ec3/0"
+    />
+    <meta property="og:url" content="https://smartledger.solutions" />
+    <meta property="og:site_name" content="SmartLedger Solutions" />
+    <meta property="og:type" content="website" />
+    <!-- smartledger tools -->
+    <script src="https://plugins.whatsonchain.com/api/plugin/main/168d796a870dec5cc241dacf140fdbbc2212c9e1ca83614e82914fc42c6d1052"></script>
+    <title>SmartLedger Web3 Key Generator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+      }
+
+      body {
+        background-color: #121212;
+        color: #e0e0e0;
+        font-size: 16px;
+        padding: 20px;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #1e1e1e;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        word-wrap: break-word;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        color: #0ab28a;
+        margin-bottom: 30px;
+      }
+
+      h3 {
+        font-size: 1.5rem;
+        color: #e0e0e0;
+        margin-top: 20px;
+      }
+
+      input,
+      textarea,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      input:focus,
+      textarea:focus,
+      button:focus {
+        outline: none;
+        border-color: #0ab28a;
+        box-shadow: 0 0 12px rgba(10, 178, 138, 0.6);
+      }
+
+      button {
+        background-color: #0ab28a;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      button:hover {
+        background-color: #089f7d;
+        box-shadow: 0 0 10px rgba(10, 178, 138, 0.6);
+      }
+
+      textarea {
+        resize: none;
+        height: 100px;
+      }
+
+      #advanced {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #333;
+        border-radius: 5px;
+        background-color: #1e1e1e;
+      }
+
+      label {
+        font-size: 1.2rem;
+        color: #e0e0e0;
+      }
+
+      input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+      }
+
+      p {
+        margin-bottom: 10px;
+      }
+
+      .derivations {
+        width: 20%;
+        display: inline-block;
+        margin-right: 10px;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #333;
+        border-radius: 8px;
+      }
+
+      #reset {
+        background-color: #ff5722;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+      }
+
+      #reset:hover {
+        background-color: #ff7043;
+        box-shadow: 0 0 10px rgba(255, 87, 34, 0.6);
+      }
+
+      #hashData,
+      #signData,
+      #verifyData {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #hashData input,
+      #signData input,
+      #verifyData input {
+        margin-bottom: 10px;
+      }
+
+      #hashData button,
+      #signData button,
+      #verifyData button {
+        width: 100%;
+      }
+
+      #hashOutput,
+      #signature,
+      #verified {
+        height: 100px;
+      }
+
+      #storeKeys {
+        margin-top: 20px;
+      }
+
+      #metameetLink {
+        margin-top: 20px;
+      }
+
+      #metameetLink a {
+        color: #0ab28a;
+        text-decoration: none;
+      }
+
+      #logo {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+      }
+
+      #infoSection {
+        display: none;
+        color: #b0bec5;
+      }
+
+      .info-toggle {
+        cursor: pointer;
+        color: #0ab28a;
+        text-decoration: underline;
+        margin-top: 20px;
+      }
+
+      #encryptedMnemonic {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      #logo {
+        width: 100px;
+        height: 100px;
+        display: block;
+        margin: 0 auto;
+      }
+      /* Style for the password popup */
+      #passwordPopup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #1e1e1e;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 1000;
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+
+      #passwordPopup input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        background-color: #2a2a2a;
+        color: #e0e0e0;
+        border: 1px solid #333;
+        border-radius: 8px;
+        font-size: 1rem;
+      }
+
+      #passwordPopup button {
+        background-color: #0ab28a;
+        color: white;
+        border: none;
+        padding: 12px;
+        margin-top: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      #passwordPopup button:hover {
+        background-color: #089f7d;
+      }
+
+      #passwordPopup h3 {
+        margin-bottom: 10px;
+        color: #e0e0e0;
+      }
+
+      /* Background dim when the popup is open */
+      #overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        z-index: 999;
+      }
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 2rem;
+        }
+
+        input,
+        textarea,
+        button {
+          font-size: 0.9rem;
+        }
+
+        .derivations {
+          width: 40%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="overlay"></div>
+    <div id="passwordPopup">
+      <h3>Enter your password to continue</h3>
+      <input type="password" id="popupPassword" placeholder="Enter password" />
+      <!-- repeat password -->
+      <input
+        type="password"
+        id="popupRepeatPassword"
+        placeholder="Repeat password"
+      />
+      <button id="popupSubmit">Submit</button>
+    </div>
+    <div class="container">
+      <img id="logo" src="sl_logo.png" alt="" />
+      <h1>SmartLedger Mnemonic & Key Generator</h1>
+      <p id="mnemonicHash"></p>
+      <h3>Optional Mnemonic:</h3>
+      <input
+        type="text"
+        id="mnemonicOptional"
+        placeholder="Enter your optional mnemonic here..."
+      />
+      <!-- optional password -->
+      <p>Optional Password:</p>
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your optional password here..."
+      />
+      <!-- checkbox to open advanced -->
+      <input type="checkbox" id="showAdvanced" />
+      <label for="showAdvanced">Show Advanced Options</label>
+      <div id="advanced" style="display: none">
+        <h3>Advanced Options:</h3>
+        <p id="basePath"></p>
+        <p>Choose Derivation Path</p>
+        <div id="derivationDiv">
+          <input
+            class="derivations"
+            type="number"
+            id="a"
+            value="0"
+            min="0"
+            max="255"
+          />
+          <input
+            class="derivations"
+            type="number"
+            id="b"
+            value="0"
+            min="0"
+            max="255"
+          />
+          <input
+            class="derivations"
+            type="number"
+            id="c"
+            value="0"
+            min="0"
+            max="255"
+          />
+          <input
+            class="derivations"
+            type="number"
+            id="d"
+            value="0"
+            min="0"
+            max="255"
+          />
+          <button id="reset">Reset</button>
+        </div>
+      </div>
+      <div class="info-toggle" id="toggleInfo">Learn More</div>
+      <div class="info-section" id="infoSection">
+        <p>
+          EZBSV.com by SmartLedger is a comprehensive tool designed to generate
+          and manage cryptographic keys across multiple industries and
+          applications. It establishes standardized practices for digital key
+          management, providing a robust framework for handling various use
+          cases, such as identity management, digital assets, collectibles, and
+          property rights.
+        </p>
+        <p>
+          The module integrates advanced features like Shamir's Secret Sharing
+          to ensure the secure backup and recovery of keys. This approach not
+          only safeguards users' digital identities and assets but also allows
+          for flexible and secure account management across different sectors.
+        </p>
+        <p>
+          In essence, Web3Keys.com is building a universal standard for digital
+          key management that can be applied to any industry, ensuring that all
+          digital interactions—whether related to finance, content creation, or
+          property rights—are secure, reliable, and easily manageable.
+        </p>
+      </div>
+      <button id="generateSimpleKeys">Generate Simple Keys</button>
+      <button id="generateSmartKeys">Generate Web3 Keys & Accounts</button>
+      <div id="storeKeys">
+        <button id="store">Store Keys</button>
+      </div>
+      <h3>Register Encrypted Keys</h3>
+      <!-- Input field for email -->
+      <input type="email" id="registerEmail" placeholder="Enter your email" />
+
+      <!-- Button to register encrypted keys -->
+      <button id="registerEncryptedKeys">Register Encrypted Keys</button>
+
+      <p id="encryptedMnemonic"></p>
+      <p id="decryptedMnemonic"></p>
+      <div id="smartKeysSection"></div>
+      <div id="simpleKeys" style="display: none">
+        <h3>Mnemonic:</h3>
+        <textarea id="mnemonic" readonly></textarea>
+
+        <h3>Private Key:</h3>
+        <textarea id="privateKey" readonly></textarea>
+
+        <h3>Public Key:</h3>
+        <textarea id="publicKey" readonly></textarea>
+
+        <h3>Address:</h3>
+        <textarea id="address" readonly></textarea>
+        <h3>Shares:</h3>
+        <textarea id="shares" readonly></textarea>
+      </div>
+      <div id="hashData">
+        <h3>Hash Data:</h3>
+        <input
+          type="text"
+          id="dataToHash"
+          placeholder="Enter data to hash..."
+        />
+        <button id="hashButton">Hash Data</button>
+        <h3>Hash:</h3>
+        <textarea id="hashOutput" readonly></textarea>
+      </div>
+      <div id="encryptData">
+        <h3>Encrypt Data:</h3>
+        <input
+          type="text"
+          id="dataToEncrypt"
+          placeholder="Enter data to encrypt..."
+        />
+        <input
+          type="text"
+          id="encryptionKey"
+          placeholder="Enter encryption key..."
+        />
+        <button id="encryptButton">Encrypt Data</button>
+        <h3>Encrypted Data:</h3>
+        <textarea id="encryptedData" readonly></textarea>
+      </div>
+      <div id="decryptData">
+        <h3>Decrypt Data:</h3>
+        <input
+          type="text"
+          id="dataToDecrypt"
+          placeholder="Enter data to decrypt..."
+        />
+        <input
+          type="text"
+          id="decryptionKey"
+          placeholder="Enter decryption key..."
+        />
+        <button id="decryptButton">Decrypt Data</button>
+        <h3>Decrypted Data:</h3>
+        <textarea id="decryptedData" readonly></textarea>
+      </div>
+      <div id="signData">
+        <h3>Sign Data:</h3>
+        <input type="text" id="data" placeholder="Enter data to sign..." />
+        <button id="signButton">Sign Data</button>
+        <h3>Signature:</h3>
+        <textarea id="signature" readonly></textarea>
+      </div>
+      <div id="verifyData">
+        <h3>Verify Data:</h3>
+        <input
+          type="text"
+          id="dataToVerify"
+          placeholder="Enter data to verify..."
+        />
+        <input
+          type="text"
+          id="signatureToVerify"
+          placeholder="Enter signature to verify..."
+        />
+        <input
+          type="text"
+          id="publicKeyToVerify"
+          placeholder="Enter public key to verify..."
+        />
+        <button id="verifyButton">Verify Data</button>
+        <h3>Verified:</h3>
+        <textarea id="verified" readonly></textarea>
+      </div>
+      <p id="copyright" style="text-align: center; margin-top: 20px">
+        <img
+          src="https://plugins.whatsonchain.com/api/plugin/main/f860fe5105526cad985ce7ce2da2c9448eafa9eef46d770a0a06e6feae591ec3/0"
+          alt=""
+          id="logo"
+        />
+        &copy; 2024 SmartLedger Solutions.
+      </p>
+    </div>
+    <script>
+      // Function to show the password popup
+      function showPasswordPopup() {
+        document.getElementById("passwordPopup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
+      }
+
+      // Function to hide the password popup
+      function hidePasswordPopup() {
+        document.getElementById("passwordPopup").style.display = "none";
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      // Helper function to handle password input through the popup
+      function getPasswordFromPopup() {
+        return new Promise((resolve) => {
+          showPasswordPopup();
+
+          const popupSubmit = document.getElementById("popupSubmit");
+          const popupPassword = document.getElementById("popupPassword");
+          const popupRepeatPassword = document.getElementById(
+            "popupRepeatPassword"
+          );
+
+          popupSubmit.addEventListener(
+            "click",
+            () => {
+              const pw = popupPassword.value;
+              const repeatPw = popupRepeatPassword.value;
+              console.log(pw, repeatPw);
+              if (!pw || !repeatPw) {
+                alert("Please enter both password fields.");
+                return;
+              }
+
+              if (pw !== repeatPw) {
+                alert("Passwords do not match.");
+                return;
+              }
+
+              // Hide the popup and resolve the promise with the password
+              hidePasswordPopup();
+              resolve(pw);
+            },
+            { once: false } // Ensure the event listener only runs once
+          );
+        });
+      }
+      let keys = {};
+      document.addEventListener("DOMContentLoaded", () => {
+        const popupSubmit = document.getElementById("popupSubmit");
+        const popupPassword = document.getElementById("popupPassword");
+        const mnemonicOptionalInput =
+          document.getElementById("mnemonicOptional");
+        const basePathElement = document.getElementById("basePath");
+        const derivationInputs = document.getElementsByClassName("derivations");
+        const simpleKeysSection = document.getElementById("simpleKeys");
+        const smartKeysSection = document.getElementById("smartKeysSection");
+        const signDataSection = document.getElementById("signData");
+        const verifyDataSection = document.getElementById("verifyData");
+        const showAdvancedCheckbox = document.getElementById("showAdvanced");
+        const advancedOptionsDiv = document.getElementById("advanced");
+        const datatoHash = document.getElementById("dataToHash");
+        const hashButton = document.getElementById("hashButton");
+        const hashOutput = document.getElementById("hashOutput");
+        const encryptButton = document.getElementById("encryptButton");
+        const decryptButton = document.getElementById("decryptButton");
+        const dataToEncrypt = document.getElementById("dataToEncrypt");
+        const encryptionKey = document.getElementById("encryptionKey");
+        const encryptedData = document.getElementById("encryptedData");
+        const dataToDecrypt = document.getElementById("dataToDecrypt");
+        const decryptionKey = document.getElementById("decryptionKey");
+        const decryptedData = document.getElementById("decryptedData");
+        const registerButton = document.getElementById("registerEncryptedKeys");
+
+        registerButton.addEventListener("click", async () => {
+          const email = document.getElementById("registerEmail").value;
+          if (!email) {
+            alert("Please enter your email.");
+            return;
+          }
+
+          const encryptedMnemonic =
+            document.getElementById("encryptedMnemonic").innerText;
+          const identity = keys.identity.publicKey;
+          const property = keys.property.publicKey;
+          const collectibles = keys.collectibles.publicKey;
+          const messaging = keys.messaging.publicKey;
+          const shamirSlice1 = keys.shares[0];
+          const shamirSlice2 = keys.shares[1];
+          const uuid = keys.uuid;
+          const share2earn = {
+            uuid: keys.share2earn.referral,
+            address: keys.share2earn.address,
+          };
+
+          if (
+            !encryptedMnemonic ||
+            !identity ||
+            !property ||
+            !collectibles ||
+            !messaging ||
+            !shamirSlice1 ||
+            !shamirSlice2 ||
+            !share2earn ||
+            !uuid
+          ) {
+            alert(
+              "Keys are not generated properly. Please generate keys first."
+            );
+            return;
+          }
+
+          try {
+            const response = await fetch("/register-encryptedUser", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email,
+                encryptedMnemonic,
+                identity,
+                property,
+                collectibles,
+                messaging,
+                shamirSlice1,
+                shamirSlice2,
+                uuid,
+                share2earn,
+                password: window.smartledger.hash(
+                  document.getElementById("password").value
+                ),
+                hashedPassword: true,
+              }),
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              alert("Encrypted keys registered successfully.");
+            } else {
+              alert(`Error: ${result.message}`);
+            }
+          } catch (error) {
+            console.error("Error registering encrypted keys:", error);
+            alert("An error occurred while registering encrypted keys.");
+          }
+        });
+        let base = "m/44'/0'/0'/0/0";
+        let identityKeys = {};
+        const hashData = (data) => {
+          return window.smartledger.hash(data);
+        };
+        hashButton.addEventListener("click", () => {
+          const data = datatoHash.value;
+          if (!data) {
+            alert("Please enter data to hash");
+            return;
+          }
+          const hash = hashData(data);
+          hashOutput.value = hash;
+          //add to data to sign
+          document.getElementById("data").value = hash;
+        });
+        // Update base path when advanced options are changed
+        for (let i = 0; i < derivationInputs.length; i++) {
+          derivationInputs[i].addEventListener("input", () => {
+            const a = document.getElementById("a").value || 0;
+            const b = document.getElementById("b").value || 0;
+            const c = document.getElementById("c").value || 0;
+            const d = document.getElementById("d").value || 0;
+            base = `m/44'/${a}'/${b}'/${c}/${d}`;
+            basePathElement.innerText = base;
+          });
+        }
+
+        // Toggle advanced options
+        showAdvancedCheckbox.addEventListener("change", () => {
+          if (showAdvancedCheckbox.checked) {
+            advancedOptionsDiv.style.display = "block";
+            resetDerivationPath();
+          } else {
+            advancedOptionsDiv.style.display = "none";
+          }
+        });
+
+        // // Reset derivation path to default
+        // const resetDerivationPath = () => {
+        //   document.getElementById("a").value = 0;
+        //   document.getElementById("b").value = 0;
+        //   document.getElementById("c").value = 0;
+        //   document.getElementById("d").value = 0;
+        //   base = "m/44'/0'/0'/0/0";
+        //   basePathElement.innerText = base;
+        // };
+
+        const copyToClipboard = (text) => {
+          const el = document.createElement("textarea");
+          el.value = text;
+          document.body.appendChild(el);
+          el.select();
+          document.execCommand("copy");
+          document.body.removeChild(el);
+          alert("Copied to clipboard");
+        };
+        // Generate simple keys
+
+        const updateSimpleKeys = (keys, encryptedMnemonic) => {
+          document.getElementById("mnemonic").value = keys.mnemonic;
+          document.getElementById("privateKey").value = keys.wif;
+          document.getElementById("publicKey").value = keys.publicKey;
+          document.getElementById("address").value = keys.address;
+          document.getElementById("shares").value = keys.shares
+            .map((share) => `${keys.shares.indexOf(share) + 1}: ${share}`)
+            .join("\n");
+          simpleKeysSection.style.display = "block";
+          smartKeysSection.style.display = "none";
+          signDataSection.style.display = "block";
+          verifyDataSection.style.display = "block";
+
+          if (encryptedMnemonic) {
+            document.getElementById(
+              "encryptedMnemonic"
+            ).innerHTML = `${encryptedMnemonic}`;
+            const baseUrl = window.location.href.split("?")[0];
+            const url = `${baseUrl}?encryptedMnemonic=${encodeURIComponent(
+              encryptedMnemonic
+            )}`;
+            copyToClipboard(url);
+            const decryptedMnemonic = window.smartledger.decrypt(
+              encryptedMnemonic,
+              window.smartledger.hash512(
+                document.getElementById("password").value
+              )
+            );
+            document.getElementById(
+              "decryptedMnemonic"
+            ).innerText = `Decrypted Mnemonic: ${decryptedMnemonic}`;
+          }
+        };
+
+        const displaySmartKeys = (keys, encryptedMnemonic) => {
+          smartKeysSection.innerHTML = "";
+          Object.keys(keys).forEach((key) => {
+            if (key === "Mnemonic") return;
+            const keySection = document.createElement("div");
+            keySection.innerHTML = `<h3>${key}</h3><textarea readonly>${JSON.stringify(
+              keys[key],
+              null,
+              2
+            )}</textarea>`;
+            smartKeysSection.appendChild(keySection);
+          });
+
+          if (encryptedMnemonic) {
+            const baseUrl = window.location.href.split("?")[0];
+            const url = `${baseUrl}?encryptedMnemonic=${encodeURIComponent(
+              encryptedMnemonic
+            )}`;
+            copyToClipboard(url);
+            document.getElementById(
+              "encryptedMnemonic"
+            ).innerHTML = `${encryptedMnemonic}`;
+            const decryptedMnemonic = window.smartledger.decrypt(
+              encryptedMnemonic,
+              window.smartledger.hash512(
+                document.getElementById("password").value
+              )
+            );
+            document.getElementById(
+              "decryptedMnemonic"
+            ).innerText = `Decrypted Mnemonic: ${decryptedMnemonic}`;
+          }
+
+          simpleKeysSection.style.display = "none";
+          smartKeysSection.style.display = "block";
+        };
+        document
+          .getElementById("generateSimpleKeys")
+          .addEventListener("click", async () => {
+            const mnemonic = mnemonicOptionalInput.value;
+            keys = await window.smartledger.simple(mnemonic, base);
+            identityKeys = keys;
+            const password = document.getElementById("password").value;
+            let encryptedMnemonic;
+            if (password) {
+              encryptedMnemonic = window.smartledger.encrypt(
+                keys.mnemonic,
+                window.smartledger.hash512(password)
+              );
+            }
+            updateSimpleKeys(keys, encryptedMnemonic);
+          });
+
+        document
+          .getElementById("generateSmartKeys")
+          .addEventListener("click", async () => {
+            const mnemonic = mnemonicOptionalInput.value || "";
+            keys = await window.smartledger.smart(mnemonic, base);
+            identityKeys = keys.identity;
+            const password = document.getElementById("password").value;
+            let encryptedMnemonic;
+            if (password) {
+              encryptedMnemonic = window.smartledger.encrypt(
+                keys.mnemonic,
+                window.smartledger.hash512(password)
+              );
+            }
+            displaySmartKeys(keys, encryptedMnemonic);
+          });
+        // Sign data
+        document.getElementById("signButton").addEventListener("click", () => {
+          const data = document.getElementById("data").value;
+          const privateKey = identityKeys.wif;
+          if (!data || !privateKey) {
+            alert("Please enter data and a private key to sign");
+            return;
+          }
+          alert(`Signing with identity: ${identityKeys.address}`);
+          const signature = window.smartledger.sign(data, privateKey);
+          document.getElementById("signature").value = signature;
+
+          // Set values for verification
+          document.getElementById("dataToVerify").value = data;
+          document.getElementById("signatureToVerify").value = signature;
+          document.getElementById("publicKeyToVerify").value =
+            identityKeys.publicKey;
+        });
+
+        // Verify data
+        document
+          .getElementById("verifyButton")
+          .addEventListener("click", () => {
+            const data = document.getElementById("dataToVerify").value;
+            const signature =
+              document.getElementById("signatureToVerify").value;
+            const publicKey =
+              document.getElementById("publicKeyToVerify").value;
+            if (!data || !signature || !publicKey) {
+              alert("Please enter data, signature, and public key to verify");
+              return;
+            }
+            const verified = window.smartledger.verify(
+              data,
+              signature,
+              publicKey
+            );
+            document.getElementById("verified").value = verified;
+          });
+
+        //window.smartledger.encrypt("data", "key");
+        //window.smartledger.decrypt("encryptedData", "key");
+
+        const encryptData = (data, key) => {
+          return window.smartledger.encrypt(data, key);
+        };
+
+        const decryptData = (data, key) => {
+          return window.smartledger.decrypt(data, key);
+        };
+
+        encryptButton.addEventListener("click", () => {
+          const data = dataToEncrypt.value;
+          const key = encryptionKey.value;
+          if (!data || !key) {
+            alert("Please enter data and a key to encrypt");
+            return;
+          }
+          const encrypted = encryptData(data, key);
+          encryptedData.value = encrypted;
+          dataToDecrypt.value = encrypted;
+          decryptionKey.value = key;
+        });
+
+        decryptButton.addEventListener("click", () => {
+          const data = dataToDecrypt.value;
+          const key = decryptionKey.value;
+          if (!data || !key) {
+            alert("Please enter data and a key to decrypt");
+            return;
+          }
+          const decrypted = decryptData(data, key);
+          decryptedData.value = decrypted;
+        });
+
+        // Reset form inputs on load
+        const resetFormInputs = async () => {
+          document.querySelectorAll("input").forEach((input) => {
+            input.value = "";
+          });
+
+          document
+            .getElementById("reset")
+            .addEventListener("click", resetDerivationPath);
+
+          document.querySelectorAll("textarea").forEach((textarea) => {
+            textarea.value = "";
+          });
+
+          showAdvancedCheckbox.checked = false;
+
+          const savedMnemonic = localStorage.getItem("mnemonic");
+          const savedEncryptedMnemonic =
+            localStorage.getItem("encryptedMnemonic");
+
+          if (savedMnemonic) {
+            mnemonicOptionalInput.value = savedMnemonic;
+          }
+
+          if (savedEncryptedMnemonic) {
+            document.getElementById(
+              "encryptedMnemonic"
+            ).innerHTML = `${savedEncryptedMnemonic}`;
+
+            // Show password popup and wait for the user to submit the password
+            const pw = await getPasswordFromPopup();
+
+            if (!pw) {
+              alert("Password is required to decrypt the mnemonic.");
+              return;
+            }
+
+            try {
+              // Decrypt the mnemonic using the entered password
+              const decryptedMnemonic = window.smartledger.decrypt(
+                savedEncryptedMnemonic,
+                window.smartledger.hash512(pw)
+              );
+
+              mnemonicOptionalInput.value = decryptedMnemonic;
+
+              // Trigger generation of smart keys
+              document.getElementById("generateSmartKeys").click();
+            } catch (error) {
+              console.error("Decryption failed:", error);
+              alert(
+                "Failed to decrypt mnemonic. Please check your password and try again."
+              );
+            }
+          } else {
+            // If no mnemonic found in localStorage, check URL params
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedMnemonic = urlParams.get("encryptedMnemonic");
+            if (encryptedMnemonic) {
+              return;
+            }
+
+            // Trigger generation of simple keys
+            document.getElementById("generateSimpleKeys").click();
+          }
+        };
+
+        const resetDerivationPath = () => {
+          document.getElementById("a").value = 0;
+          document.getElementById("b").value = 0;
+          document.getElementById("c").value = 0;
+          document.getElementById("d").value = 0;
+          base = "m/44'/0'/0'/0/0";
+          basePathElement.innerText = base;
+        };
+        // Store keys
+        document.getElementById("store").addEventListener("click", async () => {
+          if (
+            localStorage.getItem("mnemonic") ||
+            localStorage.getItem("encryptedMnemonic")
+          ) {
+            const confirmOverwrite = window.confirm(
+              "Mnemonic already stored. Do you want to overwrite?"
+            );
+            if (!confirmOverwrite) return;
+          }
+
+          const mnemonic = keys.mnemonic;
+          if (!mnemonic) {
+            alert("Mnemonic is required to store");
+            return;
+          }
+
+          // Show password popup and wait for the user to submit the password
+          const pw = await getPasswordFromPopup();
+
+          if (!pw) {
+            alert("Password is required to store mnemonic.");
+            return;
+          }
+
+          console.log(window.smartledger.hash512(pw), mnemonic, pw);
+          const encryptedMnemonic = window.smartledger.encrypt(
+            mnemonic,
+            window.smartledger.hash512(pw)
+          );
+          console.log(encryptedMnemonic);
+
+          const mykeys = {
+            uuid: keys.uuid,
+            mnemonic,
+          };
+
+          const encryptedKeys = window.smartledger.encrypt(
+            JSON.stringify(mykeys),
+            window.smartledger.hash512(pw)
+          );
+
+          // Store the keys and the encrypted mnemonic in localStorage
+          localStorage.setItem("smartKeys", encryptedKeys);
+          localStorage.setItem("encryptedMnemonic", encryptedMnemonic);
+
+          alert("Mnemonic stored successfully");
+        });
+        // Checking URL parameters for encrypted mnemonic
+        const checkParams = async () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const encryptedMnemonic = urlParams.get("encryptedMnemonic");
+
+          if (encryptedMnemonic) {
+            // Show password popup and wait for the user to submit the password
+            const pw = await getPasswordFromPopup();
+
+            if (!pw) {
+              alert("Password is required to decrypt the mnemonic.");
+              return;
+            }
+
+            try {
+              // Decrypt the mnemonic using the entered password
+              const decryptedMnemonic = window.smartledger.decrypt(
+                encryptedMnemonic,
+                window.smartledger.hash512(pw)
+              );
+
+              // Generate keys using the decrypted mnemonic
+              keys = await window.smartledger.smart(decryptedMnemonic, base);
+              const uuid = localStorage.getItem("uuid");
+              keys.uuid = uuid;
+
+              // Display the generated keys
+              displaySmartKeys(keys, encryptedMnemonic);
+
+              // Clear URL params after parsing
+              const path = window.location.pathname;
+              window.history.pushState({}, document.title, path);
+            } catch (error) {
+              console.error("Decryption failed:", error);
+              alert(
+                "Failed to decrypt mnemonic. Please check your password and try again."
+              );
+            }
+          }
+        };
+        resetFormInputs();
+        checkParams();
+      });
+      //url params
+    </script>
+  </body>
+</html>

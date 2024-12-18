@@ -50,6 +50,8 @@
         --text-color: #f8fafc;
         --error-color: #ef4444;
         --success-color: #22c55e;
+        --header-height: 64px;
+        --sidebar-width: 240px;
       }
 
       * {
@@ -70,93 +72,173 @@
         flex-direction: column;
       }
 
-      #app {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-        width: 100%;
-      }
-
-      .container {
-        background-color: rgba(255, 255, 255, 0.05);
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-height);
+        background-color: rgba(15, 23, 42, 0.95);
         backdrop-filter: blur(10px);
-        margin: 1.5rem 0;
-        padding: 1.5rem;
-        border-radius: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        padding: 0 2rem;
+        z-index: 1000;
       }
 
-      .container:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        min-width: var(--sidebar-width);
       }
 
-      h1, h2, h3 {
-        color: var(--primary-color);
-        margin-bottom: 1.5rem;
-        font-weight: 700;
-        letter-spacing: -0.025em;
+      .search-container {
+        flex: 1;
+        max-width: 800px;
+        margin: 0 2rem;
+        position: relative;
       }
 
-      h1 {
-        font-size: 2.5rem;
-        margin: 0 1rem;
-      }
-
-      input[type="text"] {
+      .search-box {
         width: 100%;
-        padding: 1rem 1.25rem;
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 0.75rem;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 2rem;
         background-color: rgba(255, 255, 255, 0.05);
         color: var(--text-color);
         font-size: 1rem;
         transition: all 0.2s ease;
       }
 
-      input[type="text"]:focus {
+      .search-box:focus {
         outline: none;
         border-color: var(--primary-color);
         background-color: rgba(255, 255, 255, 0.1);
         box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2);
       }
 
-      button {
-        background-color: var(--primary-color);
-        color: var(--background-color);
-        padding: 1rem 2rem;
-        border: none;
-        border-radius: 0.75rem;
-        cursor: pointer;
-        font-size: 1rem;
-        font-weight: 600;
-        transition: all 0.2s ease;
-      }
-
-      button:hover {
-        background-color: #14b8a6;
-        transform: translateY(-1px);
-      }
-
-      button:active {
-        transform: translateY(0);
-      }
-
-      #contentDisplay {
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 1.5rem;
-        border-radius: 0.75rem;
-        margin-top: 1.5rem;
+      .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
         color: var(--text-color);
-        overflow-x: auto;
+        opacity: 0.5;
+      }
+
+      main {
+        margin-top: var(--header-height);
+        display: flex;
+        min-height: calc(100vh - var(--header-height));
+      }
+
+      .sidebar {
+        width: var(--sidebar-width);
+        background-color: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(10px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 1rem;
+        position: fixed;
+        height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+      }
+
+      .content {
+        flex: 1;
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
+      }
+
+      .video-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        overflow: hidden;
+      }
+
+      #iframe {
+        width: 100%;
+        aspect-ratio: 16/9;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .video-info {
+        padding: 1.5rem;
+      }
+
+      .video-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
       }
 
       .metadata {
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 1rem;
-        border-radius: 0.75rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding: 1rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
         margin: 1rem 0;
+      }
+
+      .tag {
+        background-color: var(--secondary-color);
+        color: var(--text-color);
+        padding: 0.5rem 1rem;
+        border-radius: 2rem;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .tag:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-1px);
+      }
+
+      #history {
+        margin-top: 1rem;
+      }
+
+      .history-item {
+        padding: 1rem;
+        margin-bottom: 0.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .history-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateX(4px);
+      }
+
+      .loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 200px;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(45, 212, 191, 0.1);
+        border-left-color: var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
       }
 
       .error {
@@ -168,145 +250,78 @@
         border: 1px solid rgba(239, 68, 68, 0.2);
       }
 
-      #iframe {
-        width: 100%;
-        min-height: 500px;
-        border: none;
-        border-radius: 0.75rem;
-        background-color: rgba(255, 255, 255, 0.05);
-      }
-
-      .tag {
-        display: inline-block;
-        background-color: var(--secondary-color);
-        color: var(--text-color);
-        padding: 0.5rem 1rem;
-        border-radius: 2rem;
-        margin: 0.25rem;
-        font-size: 0.875rem;
-        transition: all 0.2s ease;
-      }
-
-      .tag:hover {
-        background-color: var(--primary-color);
-        transform: translateY(-1px);
-      }
-
-      #history {
-        margin-top: 2rem;
-      }
-
-      .history-item {
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border-radius: 0.75rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .history-item:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-        transform: translateY(-1px);
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem 1rem;
-        margin-bottom: 2rem;
-      }
-
-      .search-container {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-      }
-
-      .content-container {
-        flex-grow: 1;
-      }
-
-      #loading {
-        text-align: center;
-        margin: 2rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-      }
-
-      #loading::after {
-        content: "";
-        width: 1.5rem;
-        height: 1.5rem;
-        border: 3px solid var(--primary-color);
-        border-radius: 50%;
-        border-top-color: transparent;
-        animation: spin 1s linear infinite;
-      }
-
       @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
 
-      footer {
-        margin-top: auto;
-        text-align: center;
-        padding: 2rem;
-        color: rgba(255, 255, 255, 0.6);
+      @media (max-width: 1024px) {
+        .sidebar {
+          display: none;
+        }
+        .content {
+          margin-left: 0;
+        }
+        .search-container {
+          max-width: 400px;
+        }
       }
 
-      @media (max-width: 768px) {
-        #app {
-          padding: 1rem;
+      @media (max-width: 640px) {
+        header {
+          padding: 0 1rem;
         }
-
-        h1 {
-          font-size: 1.75rem;
+        .logo-container {
+          min-width: auto;
         }
-
         .search-container {
-          flex-direction: column;
+          margin: 0 1rem;
         }
-
-        button {
-          width: 100%;
+        .content {
+          padding: 1rem;
         }
       }
     </style>
   </head>
   <body>
-    <div id="app">
-      <header>
-        <img src="./logo.png" alt="Decentravision Logo" style="height: 50px" />
-        <h1>Decentravision - Blockchain Media Viewer</h1>
-      </header>
-      <div class="container search-container">
-        <input type="text" id="txid" placeholder="Enter transaction ID" />
-        <button onclick="viewContent()">View Content</button>
+    <header>
+      <div class="logo-container">
+        <img src="./logo.png" alt="Decentravision Logo" style="height: 40px" />
+        <h1 style="font-size: 1.25rem; margin: 0;">DecentraVision</h1>
       </div>
-      <div id="loading" style="display: none">Loading...</div>
-      <div class="container content-container">
-        <h3>Content:</h3>
-        <div id="content"></div>
+      <div class="search-container">
+        <input type="text" id="txid" class="search-box" placeholder="Enter transaction ID to search..." />
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
       </div>
-      <div id="history" class="container">
-        <h3>Recent Transactions</h3>
-        <div id="history-list"></div>
+    </header>
+
+    <main>
+      <aside class="sidebar">
+        <h3>Recent History</h3>
+        <div id="history"></div>
+      </aside>
+
+      <div class="content">
+        <div class="video-container">
+          <div id="iframe-container">
+            <iframe id="iframe" allowfullscreen></iframe>
+          </div>
+          <div class="video-info">
+            <h2 class="video-title" id="video-title">Enter a transaction ID to view content</h2>
+            <div class="metadata" id="metadata"></div>
+            <div class="tags-container" id="tags"></div>
+          </div>
+        </div>
+        <div id="error" class="error" style="display: none;"></div>
+        <div id="loading" class="loading" style="display: none;">
+          <div class="spinner"></div>
+        </div>
       </div>
-    </div>
-    <footer>
-      <div class="container">
-        <p>
-          &copy; 2024 <a href="https://decentravision.com/">Decentravision</a>
-        </p>
-      </div>
-    </footer>
+    </main>
     <script>
       const Buffer = bsv.deps.Buffer;
 
@@ -328,7 +343,7 @@
           const content = scriptBuffer.toString("utf8");
 
           // Find content type and actual content
-          const contentElement = document.getElementById("content");
+          const contentElement = document.getElementById("iframe-container");
 
           if (content.includes("text/html")) {
             // Extract HTML content
@@ -364,13 +379,12 @@
       }
 
       function showError(message) {
-        document.getElementById(
-          "content"
-        ).innerHTML = `<p class="error">${message}</p>`;
+        document.getElementById("error").innerHTML = message;
+        document.getElementById("error").style.display = "block";
       }
 
       function addToHistory(txid) {
-        const historyList = document.getElementById("history-list");
+        const historyList = document.getElementById("history");
         const historyItem = document.createElement("div");
         historyItem.className = "history-item";
         historyItem.textContent = txid;
